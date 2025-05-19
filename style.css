@@ -61,22 +61,18 @@ ul {
   align-items: center;
   background-color: #25D366;
   color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
+  padding: 4px 6px; /* ainda menor */
+  border-radius: 4px; /* levemente reduzido */
   text-decoration: none;
-  font-weight: bold;
+  font-weight: normal; /* menos pesado */
+  font-size: 12px; /* menor fonte */
   transition: background-color 0.3s ease;
   margin-top: 5px;
 }
 
-.whatsapp-button:hover {
-  background-color: #1ebe5d;
-}
-
 .whatsapp-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  filter: brightness(0) invert(1); /* Deixa o ícone branco */
+  width: 14px; /* menor ícone */
+  height: 14px;
+  margin-right: 5px;
+  filter: brightness(0) invert(1);
 }
-
