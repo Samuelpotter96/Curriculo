@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  color: #005a8d;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.contact a {
+  text-decoration: none;
+  color: #005a8d;
+}
+
+.skills span {
+  display: inline-block;
+  background: #005a8d;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px 5px 0 0;
+  border-radius: 5px;
+}
+
+.job-title {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.course-title {
+  display: inline-block;
+  background: #005a8d;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px 5px 15px 0;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+ul {
+  padding-left: 20px;
+}
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #25D366;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe5d;
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  filter: brightness(0) invert(1); /* Deixa o ícone branco */
+}
+
