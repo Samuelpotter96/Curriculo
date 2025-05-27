@@ -57,33 +57,32 @@
         z-index: 1; 
     }
 
-    /* Pseudo-elemento ::before: A LUZ GIRATÓRIA */
+   /* Pseudo-elemento ::before: A LUZ GIRATÓRIA */
     .neon-border::before {
         content: '';
         position: absolute;
         /* Expande o pseudo-elemento para cobrir a área de rotação e ir além */
         top: -50%;
         left: -50%;
-        width: 200%;  /* Dobro do tamanho do pai para rotação centralizada */
+        width: 200%;  /* Dobro do tamanho do pai para rotação centralizada */
         height: 200%;
         border-radius: 50%; /* Garante que o elemento giratório seja redondo */
-        
+
         /* Gradiente cônico para simular a luz girando */
         background: conic-gradient(
             transparent 0%,
             transparent 20%, /* Início da luz */
-            #6dd5ed 40%,     /* Cor principal da luz azul neon */
-            #2193b0 60%,     /* Cor secundária para transição suave */
-            transparent 80%  /* Fim da luz */
+            #6dd5ed 40%,        /* Cor principal da luz azul neon */
+            #2193b0 60%,        /* Cor secundária para transição suave */
+            transparent 80%  /* Fim da luz */
         );
-        
+
         /* Animação de rotação */
         animation: rotate-neon 3s linear infinite; /* 3s de duração, linear, infinito */
-        
-        /* Z-index: Fica *atrás* da máscara branca (::after) e da imagem (img) */
-        z-index: 0; 
-    }
 
+        /* Z-index: Vamos tentar colocá-lo um pouco acima para ver se aparece */
+        z-index: 1;
+    }
     /* Pseudo-elemento ::after: A MÁSCARA BRANCA INTERNA */
     .neon-border::after {
         content: '';
