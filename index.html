@@ -1,432 +1,427 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Samuel Potter - Currículo Interativo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@popmotion/popcorn"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/6.2.6/framer-motion.umd.js"></script>
-  
-  <style>
-    /* Estilo para o container principal do currículo */
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #f0f2f5;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        font-family: 'Inter', sans-serif; /* Mantenha a fonte aqui */
-    }
-    .main-content-wrapper {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        flex-grow: 1;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Samuel Potter - Currículo Interativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@popmotion/popcorn"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/6.2.6/framer-motion.umd.js"></script>
+    
+    <style>
+        /* Estilo para o container principal do currículo */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif; /* Mantenha a fonte aqui */
+        }
+        .main-content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
 
-    /* Animação para seções */
-    .fade-up {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s ease-in-out;
-    }
-    .fade-up.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+        /* Animação para seções */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-in-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* **CSS AJUSTADO para o efeito neon girando na borda** */
-    .neon-border {
-        position: relative;
-        /* Adicione display: flex e items-center/justify-center
-            para centralizar a imagem dentro do círculo */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden; /* Importante para que a luz giratória seja cortada na borda */
-        border: none; /* Garante que não há borda padrão */
-        background-image: none; /* Garante que não há imagem de fundo padrão */
-        border-radius: 50%; /* Garante que o container principal seja redondo */
-        
-        /* Adiciona um brilho neon suave ao redor do círculo */
-        box-shadow: 0 0 10px rgba(109, 213, 237, 0.5), /* Sombra azul clara */
-                    0 0 20px rgba(33, 147, 176, 0.4); /* Sombra azul escura */
-        transition: box-shadow 0.3s ease-in-out; /* Transição suave para o brilho */
-        
-        /* Z-index para estabelecer um contexto de empilhamento para os pseudo-elementos */
-        z-index: 1; 
-    }
+        /* **NOVO CSS para o efeito neon girando na borda** */
+        .neon-border {
+            position: relative;
+            overflow: hidden; /* Importante para que a luz giratória seja cortada na borda */
+            border: none; /* Garante que não há borda padrão */
+            background-image: none; /* Garante que não há imagem de fundo padrão */
+            /* `bg-white` do Tailwind no HTML já fornece o fundo branco do círculo */
+            
+            /* Adiciona um brilho neon suave ao redor do círculo */
+            box-shadow: 0 0 10px rgba(109, 213, 237, 0.5), /* Sombra azul clara */
+                        0 0 20px rgba(33, 147, 176, 0.4); /* Sombra azul escura */
+            transition: box-shadow 0.3s ease-in-out; /* Transição suave para o brilho */
+            
+            /* Z-index para estabelecer um contexto de empilhamento */
+            z-index: 1; 
+        }
 
-    /* Pseudo-elemento ::before: A LUZ GIRATÓRIA */
-    .neon-border::before {
-        content: '';
-        position: absolute;
-        /* Expande o pseudo-elemento para cobrir a área de rotação e ir além */
-        top: -50%;
-        left: -50%;
-        width: 200%;  /* Dobro do tamanho do pai para rotação centralizada */
-        height: 200%;
-        border-radius: 50%; /* Garante que o elemento giratório seja redondo */
+        /* Pseudo-elemento ::before: A LUZ GIRATÓRIA */
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            /* Expande o pseudo-elemento para cobrir a área de rotação e ir além */
+            top: -50%;
+            left: -50%;
+            width: 200%;  /* Dobro do tamanho do pai para rotação centralizada */
+            height: 200%;
+            border-radius: 50%; /* Garante que o elemento giratório seja redondo */
+            
+            /* Gradiente cônico para simular a luz girando */
+            background: conic-gradient(
+                transparent 0%,
+                transparent 20%, /* Início da luz */
+                #6dd5ed 40%,      /* Cor principal da luz azul neon */
+                #2193b0 60%,      /* Cor secundária para transição suave */
+                transparent 80%   /* Fim da luz */
+            );
+            
+            /* Animação de rotação */
+            animation: rotate-neon 3s linear infinite; /* 3s de duração, linear, infinito */
+            
+            /* Z-index: Fica *atrás* da máscara branca (::after) e da imagem (img) */
+            z-index: 0; 
+        }
 
-        /* Gradiente cônico para simular a luz girando */
-        background: conic-gradient(
-            transparent 0%,
-            transparent 20%, /* Início da luz */
-            #6dd5ed 40%,        /* Cor principal da luz azul neon */
-            #2193b0 60%,        /* Cor secundária para transição suave */
-            transparent 80%  /* Fim da luz */
-        );
+        /* Pseudo-elemento ::after: A MÁSCARA BRANCA INTERNA */
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            /* Define o tamanho da máscara para criar a borda.
+                Ajuste '4px' para controlar a espessura da borda neon:
+                menor valor = borda mais grossa; maior valor = borda mais fina. */
+            top: 4px; 
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            background: white; /* **CRUCIAL:** DEVE ser a mesma cor de fundo do seu círculo (bg-white do Tailwind) */
+            border-radius: inherit; /* Herda o arredondamento do pai */
+            
+            /* Z-index: Fica *acima* da luz giratória (::before), mas *abaixo* da imagem (img) */
+            z-index: 2; 
+        }
 
-        /* Animação de rotação */
-        animation: rotate-neon 3s linear infinite; /* 3s de duração, linear, infinito */
+        /* Estilo para a imagem: Garante que ela esteja SEMPRE visível no topo */
+        .neon-border img {
+            position: relative; /* Necessário para que z-index funcione */
+            z-index: 3; /* **CRUCIAL:** Fica *acima* de tudo, incluindo a máscara branca */
+        }
 
-        /* Z-index: Fica abaixo da máscara branca */
-        z-index: 1;
-    }
-    /* Pseudo-elemento ::after: A MÁSCARA BRANCA INTERNA */
-    .neon-border::after {
-        content: '';
-        position: absolute;
-        /* Define o tamanho da máscara para criar a borda.
-            Ajuste '4px' para controlar a espessura da borda neon:
-            menor valor = borda mais grossa; maior valor = borda mais fina. */
-        top: 4px; 
-        left: 4px;
-        right: 4px;
-        bottom: 4px;
-        background: white; /* **CRUCIAL:** DEVE ser a mesma cor de fundo do seu círculo (bg-white do Tailwind) */
-        border-radius: inherit; /* Herda o arredondamento do pai */
-        
-        /* Z-index: Fica *acima* da luz giratória (::before), mas *abaixo* da imagem (img) */
-        z-index: 2; 
-    }
-
-    /* Estilo para a imagem: Garante que ela esteja SEMPRE visível no topo */
-    .neon-border img {
-        position: relative; /* Necessário para que z-index funcione */
-        z-index: 3; /* **CRUCIAL:** Fica *acima* de tudo, incluindo a máscara branca e a luz */
-    }
-
-    /* Keyframes para a animação de rotação */
-    @keyframes rotate-neon {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-  </style>
+        /* Keyframes para a animação de rotação */
+        @keyframes rotate-neon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-200 relative">
 
-  <div class="absolute top-0 left-0 w-full z-0 pointer-events-none">
-        <img src="1.jpg" alt="Background 1" class="w-full opacity-20 object-cover" />
-    <img src="2.jpg" alt="Background 2" class="w-full opacity-20 object-cover" />
-    <img src="3.jpg" alt="Background 3" class="w-full opacity-20 object-cover" />
-  </div>
+    <div class="absolute top-0 left-0 w-full z-0 pointer-events-none">
+        <img src="1.jpg" alt="Background 1" class="w-full opacity-20 object-cover" />
+        <img src="2.jpg" alt="Background 2" class="w-full opacity-20 object-cover" />
+        <img src="3.jpg" alt="Background 3" class="w-full opacity-20 object-cover" />
+    </div>
 
-  <main class="max-w-5xl mx-auto p-6 relative z-20">
-    
-    <section class="bg-white shadow-2xl rounded-2xl p-6 mb-6">
-      <div class="flex flex-col md:flex-row items-center gap-6">
-                <img src="1733874841334.jpg" alt="Foto de Samuel Potter" class="rounded-full w-45 h-40 object-cover border-4 border-blue-600" />
-        <div>
-          <h1 class="text-3xl font-bold text-blue-800">Samuel Potter Barbosa</h1>
-          <p class="text-sm text-gray-600">Cachoeirinha - RS</p>
-          <div class="mt-2 space-y-2 text-sm text-gray-700">
-            <p class="flex items-center gap-2">
-              <img src="telefone.png" alt="Telefone" class="w-4 h-4" />
-              <a class="text-blue-600 no-underline" href="tel:+5551998540179">+51 99854 0179</a>
-            </p>
-            <p class="flex items-center gap-2">
-              <img src="whatsapp.png" alt="WhatsApp" class="w-4 h-4" />
-              <a class="text-green-600 no-underline" href="https://wa.me/5551998540179" target="_blank">Conversar no WhatsApp</a>
-            </p>
-            <p class="flex items-center gap-2">
-              <img src="gmail.png" alt="Email" class="w-4 h-4" />
-              <a class="text-blue-600 no-underline" href="mailto:samuelpotterbarbosa@gmail.com">samuelpotterbarbosa@gmail.com</a>
-            </p>
-            <p class="flex items-center gap-2">
-              <img src="linkedin.png" alt="LinkedIn" class="w-4 h-4" />
-              <a class="text-blue-600 no-underline" href="https://www.linkedin.com/in/samuel-potter-analista-processos/" target="_blank">LinkedIn</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <main class="max-w-5xl mx-auto p-6 relative z-20">
+        
+        <section class="bg-white shadow-2xl rounded-2xl p-6 mb-6">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <img src="1733874841334.jpg" alt="Foto de Samuel Potter" class="rounded-full w-45 h-40 object-cover border-4 border-blue-600" />
+                <div>
+                    <h1 class="text-3xl font-bold text-blue-800">Samuel Potter Barbosa</h1>
+                    <p class="text-sm text-gray-600">Cachoeirinha - RS</p>
+                    <div class="mt-2 space-y-2 text-sm text-gray-700">
+                        <p class="flex items-center gap-2">
+                            <img src="telefone.png" alt="Telefone" class="w-4 h-4" />
+                            <a class="text-blue-600 no-underline" href="tel:+5551998540179">+51 99854 0179</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <img src="whatsapp.png" alt="WhatsApp" class="w-4 h-4" />
+                            <a class="text-green-600 no-underline" href="https://wa.me/5551998540179" target="_blank">Conversar no WhatsApp</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <img src="gmail.png" alt="Email" class="w-4 h-4" />
+                            <a class="text-blue-600 no-underline" href="mailto:samuelpotterbarbosa@gmail.com">samuelpotterbarbosa@gmail.com</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <img src="linkedin.png" alt="LinkedIn" class="w-4 h-4" />
+                            <a class="text-blue-600 no-underline" href="https://www.linkedin.com/in/samuel-potter-analista-processos/" target="_blank">LinkedIn</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="bg-white p-6 rounded-2xl shadow-md fade-up">
-      <h2 class="text-2xl font-bold text-blue-700 mb-4">Resumo Profissional</h2>
-      <p>
-        <li>Profissional com experiência consolidada na análise e otimização de processos, atuando em setores estratégicos como indústria e administração pública.</li>
-        <br>
-        <li>Especialista em auditoria patrimonial, gestão documental e melhoria contínua, com foco na eficiência operacional e redução de desperdícios.</li>
-        <br>
-        <li>Conhecimento em metodologias como Lean Manufacturing e Seis Sigma, aplicando soluções para otimizar fluxos de trabalho e aumentar a produtividade.</li> <br>
-      <li>Formação em Análise e Desenvolvimento de Sistemas e Técnico em Administração de Empresas e Cursando Bacharel em Engenharia de Produção, complementada por cursos em qualidade, gestão de projetos e metodologias ágeis. </li> <br>
-      <li>Profissional comprometido com a inovação e otimização de processos, sempre buscando novas formas de agregar valor às operações.</li>
-      </p>
-    </section>
+        <section class="bg-white p-6 rounded-2xl shadow-md fade-up">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Resumo Profissional</h2>
+            <p>
+                <li>Profissional com experiência consolidada na análise e otimização de processos, atuando em setores estratégicos como indústria e administração pública.</li>
+                <br>
+                <li>Especialista em auditoria patrimonial, gestão documental e melhoria contínua, com foco na eficiência operacional e redução de desperdícios.</li>
+                <br>
+                <li>Conhecimento em metodologias como Lean Manufacturing e Seis Sigma, aplicando soluções para otimizar fluxos de trabalho e aumentar a produtividade.</li> <br>
+                <li>Formação em Análise e Desenvolvimento de Sistemas e Técnico em Administração de Empresas e Cursando Bacharel em Engenharia de Produção, complementada por cursos em qualidade, gestão de projetos e metodologias ágeis. </li> <br>
+                <li>Profissional comprometido com a inovação e otimização de processos, sempre buscando novas formas de agregar valor às operações.</li>
+            </p>
+        </section>
 
-    <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
-      <h2 class="text-2xl font-bold text-blue-700 mb-4">Experiência Profissional</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-semibold">Analista de Processos - Base Aérea de Canoas</h3>
-          <p class="text-sm text-gray-600">out de 2024 - atual | Canoas - RS · Híbrido</p>
-          <ul class="list-disc ml-6 text-sm"><br>
-            <li>Extração de dados e conciliamento de saldos contábeis no sistema SIAFI, garantindo a organização e conferência das informações.</li>
-            <li>Realização de auditorias e inspeções para assegurar a integridade dos registros patrimoniais.</li>
-            <li>Registro, catalogação e controle dos bens móveis da organização.</li>
-            <li>Acompanhamento do ciclo de vida dos bens patrimoniais (aquisição, uso, manutenção e descarte).</li>
-            <li>Análise dos fluxos de registro, movimentação e baixa de bens patrimoniais.</li>
-            <li>Identificação de falhas e sugestões de melhorias para otimizar os processos administrativos.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-semibold">Operador de Máquinas - Prometeon Tyre Group</h3>
-          <p class="text-sm text-gray-600">dez de 2021 - out de 2023 | Gravataí - RS · Presencial</p>
-          <ul class="list-disc ml-6 text-sm"><br>
-            <li>Operação de Banbury, Extrusora e Batch Off.</li>
-            <li>Controle de qualidade e manutenção preventiva.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-semibold">Assistente de Processos - Base Aérea de Canoas</h3>
-          <p class="text-sm text-gray-600">mar de 2016 - mar de 2020 | Canoas - RS · Híbrido</p>
-          <ul class="list-disc ml-6 text-sm"><br>
-            <li>Classificação e arquivamento de documentos conforme normas militares e padrões de gestão documental.</li>
-            <li>Análise e melhoria contínua dos processos de arquivamento e recuperação de informações.</li>
-            <li>Identificação de gargalos e sugestões de automação para reduzir burocracia.</li>
-            <li>Definição de fluxos de trabalho para garantir a segurança e eficiência na gestão documental.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-semibold">Assistente Administrativo de Vendas - Papelaria Graffit</h3>
-          <p class="text-sm text-gray-600">mar de 2013 - mar de 2017 | Cachoeirinha - RS · Presencial</p>
-          <ul class="list-disc ml-6 text-sm"><br>
-            <li>Atendimento ao cliente e emissão de notas fiscais.</li>
-            <li>Controle de estoque e contato com fornecedores.</li>
-            <li>Controle de estoque e acompanhamento de pedidos.</li>
-            <li>Comunicação com fornecedores para reposição de mercadorias.</li>
-            <li>Organização de arquivos e registros administrativos.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Experiência Profissional</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-semibold">Analista de Processos - Base Aérea de Canoas</h3>
+                    <p class="text-sm text-gray-600">out de 2024 - atual | Canoas - RS · Híbrido</p>
+                    <ul class="list-disc ml-6 text-sm"><br>
+                        <li>Extração de dados e conciliamento de saldos contábeis no sistema SIAFI, garantindo a organização e conferência das informações.</li>
+                        <li>Realização de auditorias e inspeções para assegurar a integridade dos registros patrimoniais.</li>
+                        <li>Registro, catalogação e controle dos bens móveis da organização.</li>
+                        <li>Acompanhamento do ciclo de vida dos bens patrimoniais (aquisição, uso, manutenção e descarte).</li>
+                        <li>Análise dos fluxos de registro, movimentação e baixa de bens patrimoniais.</li>
+                        <li>Identificação de falhas e sugestões de melhorias para otimizar os processos administrativos.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold">Operador de Máquinas - Prometeon Tyre Group</h3>
+                    <p class="text-sm text-gray-600">dez de 2021 - out de 2023 | Gravataí - RS · Presencial</p>
+                    <ul class="list-disc ml-6 text-sm"><br>
+                        <li>Operação de Banbury, Extrusora e Batch Off.</li>
+                        <li>Controle de qualidade e manutenção preventiva.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold">Assistente de Processos - Base Aérea de Canoas</h3>
+                    <p class="text-sm text-gray-600">mar de 2016 - mar de 2020 | Canoas - RS · Híbrido</p>
+                    <ul class="list-disc ml-6 text-sm"><br>
+                        <li>Classificação e arquivamento de documentos conforme normas militares e padrões de gestão documental.</li>
+                        <li>Análise e melhoria contínua dos processos de arquivamento e recuperação de informações.</li>
+                        <li>Identificação de gargalos e sugestões de automação para reduzir burocracia.</li>
+                        <li>Definição de fluxos de trabalho para garantir a segurança e eficiência na gestão documental.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold">Assistente Administrativo de Vendas - Papelaria Graffit</h3>
+                    <p class="text-sm text-gray-600">mar de 2013 - mar de 2017 | Cachoeirinha - RS · Presencial</p>
+                    <ul class="list-disc ml-6 text-sm"><br>
+                        <li>Atendimento ao cliente e emissão de notas fiscais.</li>
+                        <li>Controle de estoque e contato com fornecedores.</li>
+                        <li>Controle de estoque e acompanhamento de pedidos.</li>
+                        <li>Comunicação com fornecedores para reposição de mercadorias.</li>
+                        <li>Organização de arquivos e registros administrativos.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-      <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
-      <h2 class="text-2xl font-bold text-blue-700 mb-4">Formação Acadêmica</h2>
-      <ul class="list-none space-y-2 text-sm">
-        <li class="flex items-center gap-2">
-                    <img src="uniftec.png" alt="Uniftec" class="w-7 h-7" />
-          Uniftec - Bacharel em Engenharia de Produção - Conclusão 2030
-        </li>
-        <li class="flex items-center gap-2">
-          <img src="anhanguera.png" alt="Anhanguera" class="w-7 h-7" />
-          Universidade Anhanguera - Tecnólogo em Análise e Desenvolvimento de Sistemas - Conclusão 2026
-        </li>
-        <li class="flex items-center gap-2">
-          <img src="universitario.png" alt="Universitário Cachoeirinha" class="w-7 h-7" />
-          Universitário Cachoeirinha - Técnico em Administração de Empresas - 2017
-        </li>
-      </ul>
-    </section>
+        <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Formação Acadêmica</h2>
+            <ul class="list-none space-y-2 text-sm">
+                <li class="flex items-center gap-2">
+                    <img src="uniftec.png" alt="Uniftec" class="w-7 h-7" />
+                    Uniftec - Bacharel em Engenharia de Produção - Conclusão 2030
+                </li>
+                <li class="flex items-center gap-2">
+                    <img src="anhanguera.png" alt="Anhanguera" class="w-7 h-7" />
+                    Universidade Anhanguera - Tecnólogo em Análise e Desenvolvimento de Sistemas - Conclusão 2026
+                </li>
+                <li class="flex items-center gap-2">
+                    <img src="universitario.png" alt="Universitário Cachoeirinha" class="w-7 h-7" />
+                    Universitário Cachoeirinha - Técnico em Administração de Empresas - 2017
+                </li>
+            </ul>
+        </section>
 
-    <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
-      <h2 class="text-2xl font-bold text-blue-700 mb-4">Cursos Complementares</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        
-        <div>
-          <h3 class="text-blue-600 font-semibold mb-2 ml-6">Área da Indústria</h3>
-          <ul class="list-disc ml-6 text-sm space-y-1">
-            <li class="group cursor-pointer flex items-center gap-2">
-              Lean Six Sigma - Yellow Belt
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
-                FM2S
-              </span>
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Kaizen - Melhoria Contínua
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
-                FM2S
-              </span>
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Indústria 4.0
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="pucrs.png" alt="PUCRS" class="w-4 h-4" />
-                PUCRS
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Gestão de Projetos
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="escola-gov.png" alt="Escola Virtual Gov" class="w-4 h-4" />
-                Escola Virtual Gov
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Introdução ao Lean
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
-                FM2S
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              ISO 9000
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="pensar.png" alt="PENSAR Cursos" class="w-4 h-4" />
-                PENSAR Cursos
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Excelência Operacional
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
-                FM2S
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Power BI
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
-                FM2S
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Excel Intermediário
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
-                Bradesco
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Metrologia Industrial
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="prime.png" alt="PRIME CURSOS" class="w-4 h-4" />
-                PRIME CURSOS
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Desenho Técnico Aplicado
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="prime.png" alt="PRIME CURSOS" class="w-4 h-4" />
-                PRIME CURSOS
-              </span >
-            </li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-blue-600 font-semibold mb-2 ml-6">Área de Tecnologia</h3>
-          <ul class="list-disc ml-6 text-sm space-y-1">
-            <li class="group cursor-pointer flex items-center gap-2">
-              IoT e Programação de Sensores
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
-                Anhanguera
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Redes de Computadores e IoT
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
-                Anhanguera
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Sensores e Microcontroladores
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
-                Anhanguera
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Programação
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="devmedia.png" alt="DevMedia" class="w-4 h-4" />
-                DevMedia
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              HTML, CSS, SQL, MySQL
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="devmedia.png" alt="DevMedia" class="w-4 h-4" />
-                DevMedia
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Administração de Banco de Dados
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
-                Bradesco
-              </span >
-            </li>
-            <li class="group cursor-pointer flex items-center gap-2">
-              Análise de Dados no Power BI
-              <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
-                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
-                Bradesco
-              </span >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    
-    
-    </main>
+        <section class="bg-white p-6 rounded-2xl shadow-md fade-up mt-6">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Cursos Complementares</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <div>
+                    <h3 class="text-blue-600 font-semibold mb-2 ml-6">Área da Indústria</h3>
+                    <ul class="list-disc ml-6 text-sm space-y-1">
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Lean Six Sigma - Yellow Belt
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
+                                FM2S
+                            </span>
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Kaizen - Melhoria Contínua
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
+                                FM2S
+                            </span>
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Indústria 4.0
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="pucrs.png" alt="PUCRS" class="w-4 h-4" />
+                                PUCRS
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Gestão de Projetos
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="escola-gov.png" alt="Escola Virtual Gov" class="w-4 h-4" />
+                                Escola Virtual Gov
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Introdução ao Lean
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
+                                FM2S
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            ISO 9000
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="pensar.png" alt="PENSAR Cursos" class="w-4 h-4" />
+                                PENSAR Cursos
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Excelência Operacional
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
+                                FM2S
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Power BI
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="fm2s.png" alt="FM2S" class="w-4 h-4" />
+                                FM2S
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Excel Intermediário
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
+                                Bradesco
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Metrologia Industrial
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="prime.png" alt="PRIME CURSOS" class="w-4 h-4" />
+                                PRIME CURSOS
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Desenho Técnico Aplicado
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="prime.png" alt="PRIME CURSOS" class="w-4 h-4" />
+                                PRIME CURSOS
+                            </span >
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-blue-600 font-semibold mb-2 ml-6">Área de Tecnologia</h3>
+                    <ul class="list-disc ml-6 text-sm space-y-1">
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            IoT e Programação de Sensores
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
+                                Anhanguera
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Redes de Computadores e IoT
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
+                                Anhanguera
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Sensores e Microcontroladores
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="anhanguera.png" alt="Anhanguera" class="w-4 h-4" />
+                                Anhanguera
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Programação
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="devmedia.png" alt="DevMedia" class="w-4 h-4" />
+                                DevMedia
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            HTML, CSS, SQL, MySQL
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="devmedia.png" alt="DevMedia" class="w-4 h-4" />
+                                DevMedia
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Administração de Banco de Dados
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
+                                Bradesco
+                            </span >
+                        </li>
+                        <li class="group cursor-pointer flex items-center gap-2">
+                            Análise de Dados no Power BI
+                            <span class="hidden group-hover:flex items-center gap-1 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-md">
+                                <img src="bradesco.png" alt="Bradesco" class="w-4 h-4" />
+                                Bradesco
+                            </span >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+    </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const fadeUps = document.querySelectorAll(".fade-up");
-      fadeUps.forEach((el, i) => {
-        setTimeout(() => el.classList.add("visible"), 1500 * i); // 1.5s entre cada seção
-      });
-    });
-  </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fadeUps = document.querySelectorAll(".fade-up");
+            fadeUps.forEach((el, i) => {
+                setTimeout(() => el.classList.add("visible"), 1500 * i); // 1.5s entre cada seção
+            });
+        });
+    </script>
 
-<footer class="bg-blue-700 w-full p-6 mt-12 flex flex-col md:flex-row md:justify-between items-center text-white shadow-inner">
-  <div class="hidden md:block w-1/5"></div> 
+    <footer class="bg-blue-700 w-full p-6 mt-12 flex flex-col md:flex-row md:justify-between items-center text-white shadow-inner">
+        <div class="hidden md:block w-1/5"></div> 
 
-  <div class="flex items-center gap-6 mb-4 md:mb-0 justify-center">
-    <div class="flex flex-col items-center group">
-            <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
-                <img src="html.png" alt="HTML" class="w-16 h-16 saturate-200 contrast-150" />
-      </div>
-      <span class="text-xs mt-1 text-gray-200">HTML</span>
-    </div>
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-4 md:mb-0">
+            <div class="flex flex-col items-center group">
+                <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
+                    <img src="html.png" alt="HTML" class="w-16 h-16 saturate-200 contrast-150" />
+                </div>
+                <span class="text-xs mt-1 text-gray-200">HTML</span>
+            </div>
 
-    <div class="flex flex-col items-center group">
-      <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
-        <img src="css.png" alt="CSS" class="w-16 h-16 saturate-200 contrast-150" />
-      </div>
-      <span class="text-xs mt-1 text-gray-200">CSS</span>
-    </div>
+            <div class="flex flex-col items-center group">
+                <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
+                    <img src="css.png" alt="CSS" class="w-16 h-16 saturate-200 contrast-150" />
+                </div>
+                <span class="text-xs mt-1 text-gray-200">CSS</span>
+            </div>
 
-    <div class="flex flex-col items-center group">
-      <div class="w-20 h-20 rounded-full bg-white flex items-center justify-content shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
-        <img src="tailwind.png" alt="Tailwind" class="w-16 h-16 saturate-200 contrast-150" />
-      </div>
-      <span class="text-xs mt-1 text-gray-200">Tailwind</span>
-    </div>
+            <div class="flex flex-col items-center group">
+                <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
+                    <img src="tailwind.png" alt="Tailwind" class="w-16 h-16 saturate-200 contrast-150" />
+                </div>
+                <span class="text-xs mt-1 text-gray-200">Tailwind</span>
+            </div>
 
-    <div class="flex flex-col items-center group">
-      <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
-        <img src="js.png" alt="JavaScript" class="w-16 h-16 saturate-200 contrast-150" />
-      </div>
-      <span class="text-xs mt-1 text-gray-200">JavaScript</span>
-    </div>
-  </div>
-  
-  <div class="text-xs text-right mt-4 md:mt-0">
-    <span class="text-gray-200">Developed by </span><span class="text-blue-200">Samuel Potter</span><span class="text-gray-200">. May 2025.</span>
-  </div>
-</footer>
+            <div class="flex flex-col items-center group">
+                <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 neon-border">
+                    <img src="js.png" alt="JavaScript" class="w-16 h-16 saturate-200 contrast-150" />
+                </div>
+                <span class="text-xs mt-1 text-gray-200">JavaScript</span>
+            </div>
+        </div>
+        
+        <div class="text-xs text-right mt-4 md:mt-0">
+            <span class="text-gray-200">Developed by </span><span class="text-blue-200">Samuel Potter</span><span class="text-gray-200">. May 2025.</span>
+        </div>
+    </footer>
 </html>
